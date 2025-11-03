@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>DaUfooo´s GitHub Follower Suche</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      input {
+        padding: 5px;
+        margin-right: 10px;
+        font-size: 16px;
+      }
+      button {
+        padding: 7px 15px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .loading {
+        color: #f39c12;
+        font-weight: bold;
+      }
+      .error-message {
+        color: red;
+        font-weight: bold;
+      }
+      .followers-list {
+        list-style-type: none;
+        padding: 0;
+      }
+      .followers-list li {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body ng-app="myApp" ng-controller="followersController">
+    <h1>DaUfooo's GitHub Follower Suche</h1>
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" ng-model="username" placeholder="GitHub Username">
+      <button ng-click="getFollowers()">Get Followers</button>
+    </div>
+
+    <div class="loading" ng-show="loading">
+      <p>Loading...</p>
+    </div>
+
+    <div ng-show="notFound" class="error-message">
+      <h3>Username not found or an error occurred.</h3>
+      <p>Please check the username and try again.</p>
+    </div>
+
+    <div ng-show="loaded">
+      <h2>{{ username }}'s Followers:</h2>
+      <ul class="followers-list">
+        <li ng-repeat="follower in followers">
+          <a href="https://github.com/{{ follower.login }}" target="_blank">{{ follower.login }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      var app = angular.module("myApp", []);
+
+      app.controller("followersController", function($scope, $http) {
+        $scope.getFollowers = function() {
+          // Setze Status zurück
+          $scope.notFound = false;
+          $scope.loaded = false;
+          $scope.loading = true;
+
+          // Validierung des Benutzernamens
+          if (!$scope.username || $scope.username.trim() === "") {
+            $scope.notFound = true;
+            $scope.loading = false;
+            return;
+          }
+
+          // API Anfrage
+          $http.get('https://api.github.com/users/' + $scope.username + '/followers')
+            .then(function(response) {
+              if (response.data && response.data.length > 0) {
+                $scope.followers = response.data;
+                $scope.loaded = true;
+              } else {
+                $scope.notFound = true;
+              }
+              $scope.loading = false;
+            })
+            .catch(function(error) {
+              $scope.notFound = true;
+              $scope.loading = false;
+            });
+        };
+      });
+    </script>
+  </body>
+</html>
