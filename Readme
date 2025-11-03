@@ -1,22 +1,27 @@
-# DaUfooo's GitHub Follower Suche
+# DaUfooo's GitHub Follower Suche (PowerShell)
 
-Eine einfache Webanwendung, die es ermöglicht, die Follower eines GitHub-Benutzers anzuzeigen. Diese Anwendung nutzt AngularJS und die GitHub API, um die Follower eines angegebenen Benutzernamens zu laden und anzuzeigen.
+Dieses PowerShell-Skript ermöglicht es, die Follower eines GitHub-Benutzers direkt über die Konsole abzurufen. Es verwendet die GitHub-API und PowerShells `Invoke-RestMethod`, um die Daten zu holen.
 
 ## Funktionen
 
-- **Eingabe eines GitHub-Benutzernamens**: Der Benutzer kann den GitHub-Benutzernamen eingeben, um die Liste der Follower dieses Benutzers anzuzeigen.
-- **Anzeige der Follower**: Wenn der Benutzername gültig ist und Follower vorhanden sind, werden diese aufgelistet und als klickbare Links angezeigt.
-- **Fehlermeldung**: Wird der Benutzername nicht gefunden oder gibt es ein Problem mit der API-Anfrage, wird eine entsprechende Fehlermeldung angezeigt.
-- **Ladeanzeige**: Eine Anzeige informiert den Benutzer darüber, dass die Daten gerade geladen werden.
+- **GitHub-Benutzername eingeben**: Du wirst aufgefordert, einen GitHub-Benutzernamen einzugeben.
+- **Follower abrufen**: Das Skript zeigt alle Follower dieses Benutzers in der Konsole an.
+- **Fehlermeldungen**: Bei ungültigem Benutzernamen oder Netzwerkproblemen gibt das Skript eine aussagekräftige Fehlermeldung aus.
 
-## Technologie
+## Voraussetzungen
 
-- **Frontend**: AngularJS (Version 1.8.2)
-- **Backend**: GitHub REST API (zum Abrufen der Follower)
+- Windows mit **PowerShell** (Version 5 oder höher empfohlen)
+- Internetverbindung
 
 ## Installation
 
-1. **Klonen des Repositories**:
-   
-   ```bash
-   git clone https://github.com/DeinBenutzername/DaUfooo-GitHub-Follower-Suche.git
+1. **Skript speichern**:  
+   Speichere das Skript als `Get-GitHubFollowers.ps1`.
+
+2. **Ausführungsrichtlinie prüfen**:  
+   Stelle sicher, dass PowerShell-Skripte ausgeführt werden dürfen. Falls nicht, führe aus:
+
+   ```powershell
+   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+   .\Get-GitHubFollowers.ps1
+
