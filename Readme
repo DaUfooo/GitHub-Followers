@@ -1,4 +1,4 @@
-# DaUfooo's GitHub Follower Suche - HTML
+# DaUfooo's GitHub Follower Suche
 
 Eine einfache Webanwendung, die es ermöglicht, die Follower eines GitHub-Benutzers anzuzeigen. Diese Anwendung nutzt AngularJS und die GitHub API, um die Follower eines angegebenen Benutzernamens zu laden und anzuzeigen.
 
